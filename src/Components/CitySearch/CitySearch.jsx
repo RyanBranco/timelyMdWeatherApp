@@ -1,16 +1,16 @@
-import { useState } from "react"
 import SearchIcon from "../../UI/Search"
 import Button from "../Button/Button"
 import TextInput from "../TextInput/TextInput"
-import styles from "./CitySearch.module.css"
+import { useDispatch, useSelector } from "react-redux"
+import { updateSearchValue } from "../../redux/search"
+// import styles from "./CitySearch.module.css"
 
 export default function CitySearch() {
-    const [citySearch, setCitySearch] = useState({
-        searchValue: "",
-    })
+    const { search } = useSelector((state) => state.search)
+    const dispatch = useDispatch()
 
     const handleSearchValueChange = (id, value) => {
-        setCitySearch({ ...citySearch, [id]: value })
+        dispatch(updateSearchValue(value))
     }
 
     const handleSearch = () => {
@@ -18,7 +18,7 @@ export default function CitySearch() {
     }
 
     return (
-        <form className={`${styles.citySearchContainer} dfc aic`}>
+        <form className="dfc aic">
             <h2>Search Over 20,000 Cities</h2>
             <div className="dfr jcc aie">
                 <div className="mrl">
@@ -31,7 +31,7 @@ export default function CitySearch() {
                     />
                 </div>
                 <Button
-                    disabled={citySearch.searchValue.length > 1}
+                    disabled={search.length === 0}
                     onClick={handleSearch}
                     render={<SearchIcon height={23} />}
                     text="Search"

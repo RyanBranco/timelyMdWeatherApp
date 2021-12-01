@@ -5,9 +5,10 @@
     box-shadow: 3px 3px 0px var(--color-grey);
 }
 
-button:disabled {
-    filter: grayscale(75%);
+button:disabled:hover {
+    filter: grayscale(95%);
     cursor: initial;
+    box-shadow: 3px 3px 0px var(--color-grey);
 }
 
 .button:hover {
