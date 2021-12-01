@@ -1,0 +1,19 @@
+.button {
+    background: var(--color-black);
+    color: var(--color-white) !important;
+    border: none;
+    box-shadow: 3px 3px 0px var(--color-grey);
+}
+
+button:disabled {
+    filter: grayscale(75%);
+    cursor: initial;
+}
+
+.button:hover {
+    box-shadow: 5px 5px 0px var(--color-grey);
+}
+
+.button:active {
+    transform: translateY(4px);
+}
