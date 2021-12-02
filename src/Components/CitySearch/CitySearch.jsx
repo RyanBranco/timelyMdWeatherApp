@@ -11,7 +11,9 @@ export default function CitySearch() {
     const { weatherResult } = useSelector((state) => state)
     const dispatch = useDispatch()
 
-    const [searchValue, setSearchValue] = useState("")
+    const [searchValue, setSearchValue] = useState({
+        value: "",
+    })
     const [searchError, setSearchError] = useState("")
     const [preferredLocation, setPreferredLocation] = useState(false)
 
@@ -62,18 +64,20 @@ export default function CitySearch() {
                 </div>
                 <Button
                     disabled={searchValue.length === 0}
-                    onClick={() => handleSearch(searchValue)}
+                    onClick={() => dispatch(handleSearch(searchValue))}
                     render={<SearchIcon height={23} />}
                     text="Search"
                 />
             </div>
             {preferredLocation ? (
-                <Button
-                    text={`Get ${preferredLocation.cityName}'s weather`}
-                    onClick={() =>
-                        dispatch(handleSearch(preferredLocation.cityName))
-                    }
-                />
+                <div className="mbm">
+                    <Button
+                        text={`Get ${preferredLocation.cityName}'s weather`}
+                        onClick={() =>
+                            dispatch(handleSearch(preferredLocation.cityName))
+                        }
+                    />
+                </div>
             ) : (
                 <small>
                     Set a peferred location to instantly get the weather

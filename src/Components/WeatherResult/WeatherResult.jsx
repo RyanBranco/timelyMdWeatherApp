@@ -13,22 +13,17 @@ export default function WeatherResult() {
     const [isPreferredLocation, setIsPreferredLocation] = useState(false)
 
     const setPreferredLocation = () => {
+        const savedLocation = {
+            lat: weatherResult.result.lat,
+            lon: weatherResult.result.lon,
+            cityName: weatherResult.result.cityName,
+        }
         localStorage.setItem(
             "weather-preferred-location",
-            JSON.stringify({
-                lat: weatherResult.result.lat,
-                lon: weatherResult.result.lon,
-                name: weatherResult.result.cityName,
-            })
+            JSON.stringify(savedLocation)
         )
 
-        dispatch(
-            updatePreferredLocation({
-                lat: weatherResult.result.lat,
-                lon: weatherResult.result.lon,
-                cityName: weatherResult.result.cityName,
-            })
-        )
+        dispatch(updatePreferredLocation(savedLocation))
         setIsPreferredLocation(true)
     }
 
