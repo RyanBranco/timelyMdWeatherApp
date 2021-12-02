@@ -1,11 +1,20 @@
 .textInput {
     font-size: 22px;
     border: none;
-    box-shadow: 3px 3px 0px var(--color-grey);
+    border: 2px solid var(--color-white);
 }
 
 .hideLabel {
     visibility: hidden;
+}
+
+.error {
+    border: 2px solid var(--color-error);
+}
+
+.errorType {
+    margin-top: 0.25em;
+    display: block;
 }
 
 .textInput:hover {

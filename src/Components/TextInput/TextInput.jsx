@@ -1,10 +1,10 @@
 import styles from "./TextInput.module.css"
 
 export default function TextInput(props) {
-    const { onChange, label, id, placeholder, hideLabel } = props
+    const { onChange, label, id, placeholder, hideLabel, error } = props
 
     return (
-        <span>
+        <span className="pr">
             <label
                 className={`${
                     hideLabel && `${styles.hideLabel}`
@@ -15,11 +15,18 @@ export default function TextInput(props) {
             </label>
             <input
                 placeholder={placeholder}
-                className={`${styles.textInput} br4 ps t2`}
+                className={`${styles.textInput} ${
+                    error && styles.error
+                } br4 ps t2 bs`}
                 onChange={(e) => onChange(id, e.target.value)}
                 id={id}
                 type="text"
             />
+            {error && (
+                <small className={`${styles.errorType} errorText pa`}>
+                    {error}
+                </small>
+            )}
         </span>
     )
 }

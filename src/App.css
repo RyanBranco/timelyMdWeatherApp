@@ -1,9 +1,15 @@
 :root {
-    --color-white: #ebe8e2;
+    --color-white: #ffffff;
+    --color-off-white: #ebe8e2;
     --color-black: #111111;
     --color-grey: #979797;
     --color-light-grey: #aaaaaa;
     --color-error: #b32100;
+}
+
+.App {
+    max-width: 800px;
+    margin: 0 auto;
 }
 
 p {
@@ -11,44 +17,38 @@ p {
     margin: 0;
 }
 
-a {
-    color: #61dafb;
-}
-
 /* general */
 .br4 {
     border-radius: 4px;
-}
-
-.cp {
-    cursor: pointer;
 }
 
 .t2 {
     transition: all 0.2s;
 }
 
-.w100 {
-    width: 100%;
-}
-
-.h100 {
-    height: 100%;
-}
-
 .greyText {
     color: var(--color-grey);
+}
+
+.errorText {
+    color: var(--color-error);
+}
+
+.bs {
+    box-shadow: 3px 3px 0px var(--color-grey);
+}
+
+.pr {
+    position: relative;
+}
+.pa {
+    position: absolute;
 }
 
 /* layout */
 .dfr {
     display: flex;
     flex-direction: row;
-}
-
-.dfrr {
-    display: flex;
-    flex-direction: row-reverse;
 }
 
 .dfc {
@@ -68,14 +68,6 @@ a {
     justify-content: center;
 }
 
-.jce {
-    justify-content: flex-end;
-}
-
-.jcb {
-    justify-content: space-between;
-}
-
 .jca {
     justify-content: space-around;
 }
@@ -83,18 +75,6 @@ a {
 /* margin */
 .mn {
     margin: 0;
-}
-
-.ms {
-    margin: 0.25em;
-}
-
-.mm {
-    margin: 0.5em;
-}
-
-.ml {
-    margin: 0.75em;
 }
 
 .mbs {

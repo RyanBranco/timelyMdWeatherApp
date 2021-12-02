@@ -5,7 +5,6 @@ import TextInput from "../TextInput/TextInput"
 import { useDispatch, useSelector } from "react-redux"
 import { updateWeatherResult, updateLoading } from "../../redux/weatherResult"
 import { getWeatherByCityName, getForecastByLatLon } from "../../api/getWeather"
-import styles from "./CitySearch.module.css"
 
 export default function CitySearch() {
     const { weatherResult } = useSelector((state) => state)
@@ -18,12 +17,12 @@ export default function CitySearch() {
     const [preferredLocation, setPreferredLocation] = useState(false)
 
     const handleSearchValueChange = (id, value) => {
+        setSearchError(false)
         setSearchValue(value)
     }
 
     const handleSearch = (cityName) => async (dispatch) => {
         const dateInISO = new Date().toISOString()
-        setSearchError(false)
         dispatch(updateLoading(true))
         const cityRes = await getWeatherByCityName(cityName, dateInISO)
         if (cityRes) {
@@ -51,28 +50,11 @@ export default function CitySearch() {
     }, [weatherResult])
 
     return (
-        <form className="dfc aic mbel">
-            <div className="dfr jcc aie mbl">
-                <div className="mrl">
-                    <TextInput
-                        hideLabel={true}
-                        label="City Search"
-                        placeholder={"San Diego"}
-                        id="search"
-                        onChange={handleSearchValueChange}
-                    />
-                </div>
-                <Button
-                    disabled={searchValue.length === 0}
-                    onClick={() => dispatch(handleSearch(searchValue))}
-                    render={<SearchIcon height={23} />}
-                    text="Search"
-                />
-            </div>
+        <div>
             {preferredLocation ? (
-                <div className="mbm">
+                <div className="mbl">
                     <Button
-                        text={`Get ${preferredLocation.cityName}'s weather`}
+                        text={`Get weather in ${preferredLocation.cityName}`}
                         onClick={() =>
                             dispatch(handleSearch(preferredLocation.cityName))
                         }
@@ -83,10 +65,26 @@ export default function CitySearch() {
                     Set a peferred location to instantly get the weather
                 </small>
             )}
-
-            {searchError && (
-                <p className={`${styles.searchError}`}>{searchError}</p>
-            )}
-        </form>
+            <form className="dfc aic mbel">
+                <div className="dfr jcc aie">
+                    <div className="mrl">
+                        <TextInput
+                            hideLabel={true}
+                            label="City Search"
+                            placeholder={"San Diego"}
+                            id="search"
+                            error={searchError}
+                            onChange={handleSearchValueChange}
+                        />
+                    </div>
+                    <Button
+                        disabled={searchValue.length === 0}
+                        onClick={() => dispatch(handleSearch(searchValue))}
+                        render={<SearchIcon height={23} />}
+                        text="Search"
+                    />
+                </div>
+            </form>
+        </div>
     )
 }

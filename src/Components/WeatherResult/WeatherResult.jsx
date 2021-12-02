@@ -10,6 +10,7 @@ import { useEffect, useState } from "react"
 export default function WeatherResult() {
     const { weatherResult } = useSelector((state) => state)
     const dispatch = useDispatch()
+
     const [isPreferredLocation, setIsPreferredLocation] = useState(false)
 
     const setPreferredLocation = () => {
@@ -44,7 +45,7 @@ export default function WeatherResult() {
 
     return (
         <div
-            className={`${styles.weatherResultContainer} dfc aic jcc br4 pl w100`}
+            className={`${styles.weatherResultContainer} dfc aic jcc br4 pl bs`}
         >
             {weatherResult.loading ? (
                 <LoadingSpinner height={40} />
@@ -53,7 +54,7 @@ export default function WeatherResult() {
                     <div className={`${styles.cityName} dfc mn mbl aic`}>
                         {weatherResult.result.cityName} (
                         {weatherResult.result.country})
-                        <sup className={`${styles.latLon} mbl`}>
+                        <sup className="mbl greyText">
                             <small>
                                 {weatherResult.result.lat},{" "}
                                 {weatherResult.result.lon}
@@ -113,7 +114,7 @@ export default function WeatherResult() {
                     {weatherResult.result.daily.map((day, index) => (
                         <div
                             key={day.dt}
-                            className={`${styles.forecastItem} br4 ps`}
+                            className={`${styles.forecastItem} bs br4 ps`}
                         >
                             <h3 className="mn mbm dfr aic">
                                 {index === 0
