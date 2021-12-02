@@ -11,7 +11,7 @@ export default function TextInput(props) {
                 } dfr dif ac mbs`}
                 htmlFor={id}
             >
-                label
+                {label}
             </label>
             <input
                 placeholder={placeholder}
