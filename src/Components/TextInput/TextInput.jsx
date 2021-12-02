@@ -5,8 +5,13 @@ export default function TextInput(props) {
 
     return (
         <span>
-            <label className="dfr dif ac mbs" htmlFor={id}>
-                {!hideLabel && label}
+            <label
+                className={`${
+                    hideLabel && `${styles.hideLabel}`
+                } dfr dif ac mbs`}
+                htmlFor={id}
+            >
+                label
             </label>
             <input
                 placeholder={placeholder}

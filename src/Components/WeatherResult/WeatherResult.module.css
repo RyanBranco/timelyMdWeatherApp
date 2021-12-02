@@ -3,5 +3,34 @@
     box-shadow: 3px 3px 0px var(--color-grey);
     min-width: 310px;
     max-width: 800px;
-    width: 80%;
+    min-height: 500px;
+    margin: 0 auto;
+}
+
+.cityName {
+    font-size: 32px;
+}
+
+.cityName sup {
+    font-size: 18px;
+}
+
+.latLon {
+    color: var(--color-light-grey);
+}
+
+.largeItem {
+    font-size: 42px;
+}
+
+.forecastContainer {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    column-gap: 15px;
+    row-gap: 15px;
+}
+
+.forecastItem {
+    border: 2px solid var(--color-grey);
+    box-shadow: 2px 2px 0px var(--color-grey);
 }

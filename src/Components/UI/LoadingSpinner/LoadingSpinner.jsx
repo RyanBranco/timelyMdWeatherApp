@@ -8,7 +8,7 @@ export default function LoadingSpinner({ height }) {
             className={`${styles.loadingSpinner}`}
             viewBox="0 0 600 600"
             aria-labelledby="spinner-id-0__title"
-            fill="#111111"
+            fill="#979797"
         >
             <defs>
                 <linearGradient
@@ -40,7 +40,7 @@ export default function LoadingSpinner({ height }) {
                             y="0"
                             width="300"
                             height="600"
-                            fill="#111111"
+                            fill="#979797"
                         ></rect>
                         <rect
                             shapeRendering="crispEdges"
@@ -48,7 +48,7 @@ export default function LoadingSpinner({ height }) {
                             y="0"
                             width="300"
                             height="600"
-                            fill="#111111"
+                            fill="#979797"
                         ></rect>
                     </g>
                 </pattern>

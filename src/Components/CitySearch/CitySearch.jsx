@@ -1,5 +1,5 @@
 import { useState } from "react"
-import SearchIcon from "../../UI/Search"
+import SearchIcon from "../UI/Search"
 import Button from "../Button/Button"
 import TextInput from "../TextInput/TextInput"
 import { useDispatch, useSelector } from "react-redux"
@@ -19,6 +19,8 @@ export default function CitySearch() {
     }
 
     const handleSearch = () => async (dispatch) => {
+        const dateInISO = new Date().toISOString()
+        console.log(dateInISO)
         setSearchError(false)
         dispatch(updateLoading(true))
         try {
@@ -26,9 +28,15 @@ export default function CitySearch() {
                 `https://api.openweathermap.org/data/2.5/weather?q=${value}&APPID=281e9dfdc104a5e5667ee09c6bdcb0d4`
             )
             const getForcast = await axios.get(
-                `https://api.openweathermap.org/data/2.5/onecall?lat=${cityRes.data.coord.lat}&lon=${cityRes.data.coord.lon}&APPID=281e9dfdc104a5e5667ee09c6bdcb0d4`
+                `https://api.openweathermap.org/data/2.5/onecall?lat=${cityRes.data.coord.lat}&lon=${cityRes.data.coord.lon}&units=imperial&APPID=281e9dfdc104a5e5667ee09c6bdcb0d4`
             )
-            dispatch(updateWeatherResult(getForcast.data))
+            dispatch(
+                updateWeatherResult({
+                    ...getForcast.data,
+                    cityName: cityRes.data.name,
+                    country: cityRes.data.sys.country,
+                })
+            )
         } catch {
             dispatch(updateWeatherResult(null))
             setSearchError("Could not find city")
@@ -43,7 +51,7 @@ export default function CitySearch() {
                     <TextInput
                         hideLabel={true}
                         label="City Search"
-                        placeholder={"San Diego, CA"}
+                        placeholder={"San Diego"}
                         id="search"
                         onChange={handleSearchValueChange}
                     />

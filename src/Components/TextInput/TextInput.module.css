@@ -4,6 +4,10 @@
     box-shadow: 3px 3px 0px var(--color-grey);
 }
 
+.hideLabel {
+    visibility: hidden;
+}
+
 .textInput:hover {
     box-shadow: 5px 5px 0px var(--color-grey);
 }
