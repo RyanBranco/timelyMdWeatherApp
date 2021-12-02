@@ -25,10 +25,10 @@ export default function CitySearch() {
         dispatch(updateLoading(true))
         try {
             const cityRes = await axios.get(
-                `https://api.openweathermap.org/data/2.5/weather?q=${value}&APPID=281e9dfdc104a5e5667ee09c6bdcb0d4`
+                `https://api.openweathermap.org/data/2.5/weather?q=${value}&APPID=${process.env.REACT_APP_PRODUCTION_WEATHER_API_KEY}`
             )
             const getForcast = await axios.get(
-                `https://api.openweathermap.org/data/2.5/onecall?lat=${cityRes.data.coord.lat}&lon=${cityRes.data.coord.lon}&units=imperial&APPID=281e9dfdc104a5e5667ee09c6bdcb0d4`
+                `https://api.openweathermap.org/data/2.5/onecall?lat=${cityRes.data.coord.lat}&lon=${cityRes.data.coord.lon}&units=imperial&APPID=${process.env.REACT_APP_PRODUCTION_WEATHER_API_KEY}`
             )
             dispatch(
                 updateWeatherResult({
