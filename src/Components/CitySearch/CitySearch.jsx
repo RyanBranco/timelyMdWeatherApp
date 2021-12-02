@@ -4,7 +4,7 @@ import Button from "../Button/Button"
 import TextInput from "../TextInput/TextInput"
 import { useDispatch, useSelector } from "react-redux"
 import { updateWeatherResult, updateLoading } from "../../redux/weatherResult"
-import { getWeatherByCityName, getForecastByLatLon } from "../../api/getWeather"
+import { getCurrentWeather, getForecastByLatLon } from "../../api/getWeather"
 
 export default function CitySearch() {
     const { weatherResult } = useSelector((state) => state)
@@ -24,16 +24,16 @@ export default function CitySearch() {
     const handleSearch = (cityName) => async (dispatch) => {
         const dateInISO = new Date().toISOString()
         dispatch(updateLoading(true))
-        const cityRes = await getWeatherByCityName(cityName, dateInISO)
+        const cityRes = await getCurrentWeather(dateInISO, cityName)
         if (cityRes) {
-            const foreCast = await getForecastByLatLon(
+            const forecast = await getForecastByLatLon(
+                dateInISO,
                 cityRes.coord.lat,
-                cityRes.coord.lon,
-                dateInISO
+                cityRes.coord.lon
             )
             dispatch(
                 updateWeatherResult({
-                    ...foreCast,
+                    ...forecast,
                     cityName: cityRes.name,
                     country: cityRes.sys.country,
                 })
@@ -61,9 +61,7 @@ export default function CitySearch() {
                     />
                 </div>
             ) : (
-                <small>
-                    Set a peferred location to instantly get the weather
-                </small>
+                <p className="mbl">No preferred location</p>
             )}
             <form className="dfc aic mbel">
                 <div className="dfr jcc aie">
