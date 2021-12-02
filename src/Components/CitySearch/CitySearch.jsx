@@ -1,26 +1,41 @@
+import { useState } from "react"
 import SearchIcon from "../../UI/Search"
 import Button from "../Button/Button"
 import TextInput from "../TextInput/TextInput"
 import { useDispatch, useSelector } from "react-redux"
 import { updateSearchValue } from "../../redux/search"
-// import styles from "./CitySearch.module.css"
+import { updateWeatherResult, updateLoading } from "../../redux/weatherResult"
+import axios from "axios"
+import styles from "./CitySearch.module.css"
 
 export default function CitySearch() {
-    const { search } = useSelector((state) => state.search)
+    const { value } = useSelector((state) => state.search)
     const dispatch = useDispatch()
+
+    const [searchError, setSearchError] = useState("")
 
     const handleSearchValueChange = (id, value) => {
         dispatch(updateSearchValue(value))
     }
 
-    const handleSearch = () => {
-        console.log("I run search")
+    const handleSearch = () => async (dispatch) => {
+        setSearchError(false)
+        dispatch(updateLoading(true))
+        try {
+            const cityRes = await axios.get(
+                `https://api.openweathermap.org/data/2.5/weather?q=${value}&APPID=281e9dfdc104a5e5667ee09c6bdcb0d4`
+            )
+            dispatch(updateWeatherResult(cityRes.data))
+        } catch {
+            dispatch(updateWeatherResult(null))
+            setSearchError("Could not find city")
+        }
+        dispatch(updateLoading(false))
     }
 
     return (
-        <form className="dfc aic">
-            <h2>Search Over 20,000 Cities</h2>
-            <div className="dfr jcc aie">
+        <form className="dfc aic gap">
+            <div className="dfr jcc aie mbl">
                 <div className="mrl">
                     <TextInput
                         hideLabel={true}
@@ -31,12 +46,15 @@ export default function CitySearch() {
                     />
                 </div>
                 <Button
-                    disabled={search.length === 0}
-                    onClick={handleSearch}
+                    disabled={value.length === 0}
+                    onClick={() => dispatch(handleSearch())}
                     render={<SearchIcon height={23} />}
                     text="Search"
                 />
             </div>
+            {searchError && (
+                <p className={`${styles.searchError}`}>{searchError}</p>
+            )}
         </form>
     )
 }

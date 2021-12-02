@@ -1,2 +1,3 @@
-.citySearchContiner {
+.searchError {
+    color: var(--color-error);
 }

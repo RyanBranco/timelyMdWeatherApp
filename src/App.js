@@ -1,13 +1,14 @@
 import "./App.css"
 import CitySearch from "./Components/CitySearch/CitySearch"
+import Header from "./Components/Header/Header"
+import WeatherResult from "./Components/WeatherResult/WeatherResult"
 
 function App() {
     return (
         <div className="App">
-            <header>
-                <h1 className="mbel">What's the Weather?</h1>
-            </header>
+            <Header />
             <CitySearch />
+            <WeatherResult />
         </div>
     )
 }
