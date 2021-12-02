@@ -5,7 +5,7 @@ import TextInput from "../TextInput/TextInput"
 import { useDispatch, useSelector } from "react-redux"
 import { updateSearchValue } from "../../redux/search"
 import { updateWeatherResult, updateLoading } from "../../redux/weatherResult"
-import axios from "axios"
+import { getWeatherByCityName, getForecastByLatLon } from "../../api/getWeather"
 import styles from "./CitySearch.module.css"
 
 export default function CitySearch() {
@@ -20,24 +20,23 @@ export default function CitySearch() {
 
     const handleSearch = () => async (dispatch) => {
         const dateInISO = new Date().toISOString()
-        console.log(dateInISO)
         setSearchError(false)
         dispatch(updateLoading(true))
-        try {
-            const cityRes = await axios.get(
-                `https://api.openweathermap.org/data/2.5/weather?q=${value}&APPID=${process.env.REACT_APP_PRODUCTION_WEATHER_API_KEY}`
-            )
-            const getForcast = await axios.get(
-                `https://api.openweathermap.org/data/2.5/onecall?lat=${cityRes.data.coord.lat}&lon=${cityRes.data.coord.lon}&units=imperial&APPID=${process.env.REACT_APP_PRODUCTION_WEATHER_API_KEY}`
+        const cityRes = await getWeatherByCityName(value, dateInISO)
+        if (cityRes) {
+            const foreCast = await getForecastByLatLon(
+                cityRes.coord.lat,
+                cityRes.coord.lon,
+                dateInISO
             )
             dispatch(
                 updateWeatherResult({
-                    ...getForcast.data,
-                    cityName: cityRes.data.name,
-                    country: cityRes.data.sys.country,
+                    ...foreCast,
+                    cityName: cityRes.name,
+                    country: cityRes.sys.country,
                 })
             )
-        } catch {
+        } else {
             dispatch(updateWeatherResult(null))
             setSearchError("Could not find city")
         }
