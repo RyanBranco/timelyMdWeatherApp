@@ -12,8 +12,8 @@ export default function WeatherResult() {
                 <LoadingSpinner height={40} />
             ) : (
                 weatherResult.result !== null && (
-                    <div className={`${styles.weatherResultContainer}`}>
-                        <h3>{weatherResult.result.name}</h3>
+                    <div className={`${styles.weatherResultContainer} br4 pl`}>
+                        <h2 className="mn">{weatherResult.result.name}</h2>
                     </div>
                 )
             )}

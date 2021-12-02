@@ -25,7 +25,10 @@ export default function CitySearch() {
             const cityRes = await axios.get(
                 `https://api.openweathermap.org/data/2.5/weather?q=${value}&APPID=281e9dfdc104a5e5667ee09c6bdcb0d4`
             )
-            dispatch(updateWeatherResult(cityRes.data))
+            const getForcast = await axios.get(
+                `https://api.openweathermap.org/data/2.5/onecall?lat=${cityRes.data.coord.lat}&lon=${cityRes.data.coord.lon}&APPID=281e9dfdc104a5e5667ee09c6bdcb0d4`
+            )
+            dispatch(updateWeatherResult(getForcast.data))
         } catch {
             dispatch(updateWeatherResult(null))
             setSearchError("Could not find city")
@@ -34,7 +37,7 @@ export default function CitySearch() {
     }
 
     return (
-        <form className="dfc aic gap">
+        <form className="dfc aic mbel">
             <div className="dfr jcc aie mbl">
                 <div className="mrl">
                     <TextInput
