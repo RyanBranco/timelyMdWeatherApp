@@ -1,28 +1,78 @@
-import { useSelector } from "react-redux"
+import { useSelector, useDispatch } from "react-redux"
 import LoadingSpinner from "../UI/LoadingSpinner/LoadingSpinner"
 import Temp from "../UI/Temp"
 import Humidity from "../UI/Humidity"
 import styles from "./WeatherResult.module.css"
+import Button from "../Button/Button"
+import { updatePreferredLocation } from "../../redux/weatherResult"
+import { useEffect, useState } from "react"
 
 export default function WeatherResult() {
     const { weatherResult } = useSelector((state) => state)
+    const dispatch = useDispatch()
+    const [isPreferredLocation, setIsPreferredLocation] = useState(false)
+
+    const setPreferredLocation = () => {
+        localStorage.setItem(
+            "weather-preferred-location",
+            JSON.stringify({
+                lat: weatherResult.result.lat,
+                lon: weatherResult.result.lon,
+                name: weatherResult.result.cityName,
+            })
+        )
+
+        dispatch(
+            updatePreferredLocation({
+                lat: weatherResult.result.lat,
+                lon: weatherResult.result.lon,
+                cityName: weatherResult.result.cityName,
+            })
+        )
+        setIsPreferredLocation(true)
+    }
+
+    useEffect(() => {
+        const preferredLatLon = JSON.parse(
+            localStorage.getItem("weather-preferred-location")
+        )
+
+        if (
+            preferredLatLon &&
+            weatherResult.result &&
+            preferredLatLon.lat === weatherResult.result.lat &&
+            preferredLatLon.lon === weatherResult.result.lon
+        )
+            setIsPreferredLocation(true)
+        else setIsPreferredLocation(false)
+    }, [weatherResult.result])
 
     return (
-        <div className={`${styles.weatherResultContainer} dfc aic jcc br4 pl`}>
+        <div
+            className={`${styles.weatherResultContainer} dfc aic jcc br4 pl w100`}
+        >
             {weatherResult.loading ? (
                 <LoadingSpinner height={40} />
             ) : weatherResult.result !== null ? (
                 <div>
-                    <p className={`${styles.cityName} dfc mn mbl aic`}>
+                    <div className={`${styles.cityName} dfc mn mbl aic`}>
                         {weatherResult.result.cityName} (
                         {weatherResult.result.country})
-                        <sup className={`${styles.latLon}`}>
+                        <sup className={`${styles.latLon} mbl`}>
                             <small>
                                 {weatherResult.result.lat},{" "}
                                 {weatherResult.result.lon}
                             </small>
                         </sup>
-                    </p>
+                        {isPreferredLocation ? (
+                            <p>This is your preferred location 👍</p>
+                        ) : (
+                            <Button
+                                onClick={setPreferredLocation}
+                                text="Set as preferred location"
+                            />
+                        )}
+                    </div>
                     <div className="dfr jca mbel">
                         <div className="dfc">
                             <div className="dfr aic">

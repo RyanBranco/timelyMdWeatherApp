@@ -1,28 +1,29 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import SearchIcon from "../UI/Search"
 import Button from "../Button/Button"
 import TextInput from "../TextInput/TextInput"
 import { useDispatch, useSelector } from "react-redux"
-import { updateSearchValue } from "../../redux/search"
 import { updateWeatherResult, updateLoading } from "../../redux/weatherResult"
 import { getWeatherByCityName, getForecastByLatLon } from "../../api/getWeather"
 import styles from "./CitySearch.module.css"
 
 export default function CitySearch() {
-    const { value } = useSelector((state) => state.search)
+    const { weatherResult } = useSelector((state) => state)
     const dispatch = useDispatch()
 
+    const [searchValue, setSearchValue] = useState("")
     const [searchError, setSearchError] = useState("")
+    const [preferredLocation, setPreferredLocation] = useState(false)
 
     const handleSearchValueChange = (id, value) => {
-        dispatch(updateSearchValue(value))
+        setSearchValue(value)
     }
 
-    const handleSearch = () => async (dispatch) => {
+    const handleSearch = (cityName) => async (dispatch) => {
         const dateInISO = new Date().toISOString()
         setSearchError(false)
         dispatch(updateLoading(true))
-        const cityRes = await getWeatherByCityName(value, dateInISO)
+        const cityRes = await getWeatherByCityName(cityName, dateInISO)
         if (cityRes) {
             const foreCast = await getForecastByLatLon(
                 cityRes.coord.lat,
@@ -43,6 +44,10 @@ export default function CitySearch() {
         dispatch(updateLoading(false))
     }
 
+    useEffect(() => {
+        setPreferredLocation(weatherResult.preferredLocation)
+    }, [weatherResult])
+
     return (
         <form className="dfc aic mbel">
             <div className="dfr jcc aie mbl">
@@ -56,12 +61,25 @@ export default function CitySearch() {
                     />
                 </div>
                 <Button
-                    disabled={value.length === 0}
-                    onClick={() => dispatch(handleSearch())}
+                    disabled={searchValue.length === 0}
+                    onClick={() => handleSearch(searchValue)}
                     render={<SearchIcon height={23} />}
                     text="Search"
                 />
             </div>
+            {preferredLocation ? (
+                <Button
+                    text={`Get ${preferredLocation.cityName}'s weather`}
+                    onClick={() =>
+                        dispatch(handleSearch(preferredLocation.cityName))
+                    }
+                />
+            ) : (
+                <small>
+                    Set a peferred location to instantly get the weather
+                </small>
+            )}
+
             {searchError && (
                 <p className={`${styles.searchError}`}>{searchError}</p>
             )}
