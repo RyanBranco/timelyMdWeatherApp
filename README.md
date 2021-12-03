@@ -1,5 +1,7 @@
 # What's the Weather?
 
+View the [live demo](https://ryanbranco.github.io/timelyMdWeatherApp/)
+
 A simple weather app the utalizes the OpenWeather API.
 
 Uses the browsers geolocation feature to get the users latitude and longitute to make the first api request. Subsequent requests can be made by typing a city into the search bar.
