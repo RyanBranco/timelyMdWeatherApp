@@ -29,15 +29,14 @@ export default function WeatherResult() {
     }
 
     useEffect(() => {
-        const preferredLatLon = JSON.parse(
+        const preferredLocation = JSON.parse(
             localStorage.getItem("weather-preferred-location")
         )
 
         if (
-            preferredLatLon &&
+            preferredLocation &&
             weatherResult.result &&
-            preferredLatLon.lat === weatherResult.result.lat &&
-            preferredLatLon.lon === weatherResult.result.lon
+            preferredLocation.cityName === weatherResult.result.cityName
         )
             setIsPreferredLocation(true)
         else setIsPreferredLocation(false)
