@@ -1,8 +1,8 @@
 {
   "files": {
-    "main.css": "/timelyMdWeatherApp/static/css/main.3c81d09f.chunk.css",
-    "main.js": "/timelyMdWeatherApp/static/js/main.daf7626a.chunk.js",
-    "main.js.map": "/timelyMdWeatherApp/static/js/main.daf7626a.chunk.js.map",
+    "main.css": "/timelyMdWeatherApp/static/css/main.12988a2b.chunk.css",
+    "main.js": "/timelyMdWeatherApp/static/js/main.28c0b56f.chunk.js",
+    "main.js.map": "/timelyMdWeatherApp/static/js/main.28c0b56f.chunk.js.map",
     "runtime-main.js": "/timelyMdWeatherApp/static/js/runtime-main.8a0d1061.js",
     "runtime-main.js.map": "/timelyMdWeatherApp/static/js/runtime-main.8a0d1061.js.map",
     "static/js/2.85e1a9d5.chunk.js": "/timelyMdWeatherApp/static/js/2.85e1a9d5.chunk.js",
@@ -10,14 +10,14 @@
     "static/js/3.7482e930.chunk.js": "/timelyMdWeatherApp/static/js/3.7482e930.chunk.js",
     "static/js/3.7482e930.chunk.js.map": "/timelyMdWeatherApp/static/js/3.7482e930.chunk.js.map",
     "index.html": "/timelyMdWeatherApp/index.html",
-    "static/css/main.3c81d09f.chunk.css.map": "/timelyMdWeatherApp/static/css/main.3c81d09f.chunk.css.map",
+    "static/css/main.12988a2b.chunk.css.map": "/timelyMdWeatherApp/static/css/main.12988a2b.chunk.css.map",
     "static/js/2.85e1a9d5.chunk.js.LICENSE.txt": "/timelyMdWeatherApp/static/js/2.85e1a9d5.chunk.js.LICENSE.txt",
     "static/media/index.css": "/timelyMdWeatherApp/static/media/Gilroy-ExtraBold.0094146a.otf"
   },
   "entrypoints": [
     "static/js/runtime-main.8a0d1061.js",
     "static/js/2.85e1a9d5.chunk.js",
-    "static/css/main.3c81d09f.chunk.css",
-    "static/js/main.daf7626a.chunk.js"
+    "static/css/main.12988a2b.chunk.css",
+    "static/js/main.28c0b56f.chunk.js"
   ]
 }
