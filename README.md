@@ -10,4 +10,4 @@ After the user has searched a city, they have the option to set it as their pref
 
 There is a list of features that I would like to add such as always displaying the weather for the preferred location at the top, displaying more data such as "feels like", "wind speed", "sunrise and sunset" etc... but I have to stop myself somewhere and I don't believe that the is goal of this project.
 
-NOTE: I couldn't pass the current ISO timestamp in the header for the api requests because it would return a cors error(passing any sort of headers would return a cors error). A solution that I thought of would be set up a node.js backend and call the api there... but I think that is beyond the scope of this project.
+NOTE: I couldn't pass the current ISO timestamp in the header for the api requests because it would return a cors error (passing any sort of headers would return a cors error). A solution that I thought of would be set up a node.js backend and call the api there... but I think that is beyond the scope of this project.

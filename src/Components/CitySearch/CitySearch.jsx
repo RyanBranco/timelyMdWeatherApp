@@ -65,7 +65,7 @@ export default function CitySearch() {
             )}
             <form className="dfc aic mbel">
                 <div className="dfr jcc aie">
-                    <div className="mrl">
+                    <div className="mrs">
                         <TextInput
                             hideLabel={true}
                             label="City Search"

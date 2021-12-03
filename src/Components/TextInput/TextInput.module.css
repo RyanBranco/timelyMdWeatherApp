@@ -2,6 +2,7 @@
     font-size: 22px;
     border: none;
     border: 2px solid var(--color-white);
+    width: 90%;
 }
 
 .hideLabel {
