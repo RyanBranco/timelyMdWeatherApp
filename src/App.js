@@ -25,7 +25,6 @@ function App() {
             )
             dispatch(updateLoading(false))
         }
-
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition((position) => {
                 dispatch(
